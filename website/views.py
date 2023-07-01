@@ -21,6 +21,10 @@ diabetes_classifier = pickle.load(open('./website/Diabetes/d_regmodel.pkl','rb')
 diabetes_scalar = pickle.load(open('./website/Diabetes/d_scaling.pkl', 'rb'))
 
 
+car_regmodel = pickle.load(open('./website/Car/c_regmodel.pkl','rb'))
+car_scalar = pickle.load(open('./website/Car/c_scaling.pkl', 'rb'))
+
+
 
 @views.route('/House') 
 def house():
@@ -29,6 +33,7 @@ def house():
 @views.route('/Car') 
 def car():
     return render_template('car.html')
+
 @views.route('/Diabetes') 
 def diabetes():
     return render_template('diabetes.html')
@@ -46,6 +51,18 @@ def predict_api():
     print(output[0])
     return jsonify(output[0])
 
+# HOUSE PREDICT POST METHOD
+@views.route('/predict', methods=['POST'])
+def predict():
+    data = [float(x) for x in request.form.values()]
+    final_input = house_scalar.transform(np.array(data).reshape(1, -1))
+    print(final_input)
+    output = house_regmodel.predict(final_input)[0]
+    output = format(output,".2f")
+    return render_template("house.html", prediction_text="The House price prediction is {} Million $".format(output))
+
+
+
 
 #DIABETES PREDICT API
 @views.route('/Diabetes/d_predict_api', methods=['POST'])
@@ -57,7 +74,6 @@ def d_predict_api():
     output = diabetes_classifier.predict(new_data)
     print(output[0])
     return jsonify(output[0])
-
 
 # DIABETED PREDICT POST METHOD
 @views.route('/d_predict', methods=['POST'])
@@ -72,13 +88,30 @@ def d_predict():
     else:
         return render_template("diabetes.html", prediction_text=" You don't have Diabetes" )
 
-# HOUSE PREDICT POST METHOD
-@views.route('/predict', methods=['POST'])
-def predict():
+
+
+
+#CAR PREDICT API
+@views.route('/Car/c_predict_api', methods=['POST'])
+def c_predict_api():
+    data = request.json['data']
+    print(data)
+    print(np.array(list(data.values())).reshape(1, -1))
+    new_data = car_scalar.transform(np.array(list(data.values())).reshape(1, -1))
+    output = car_regmodel.predict(new_data)
+    print(output[0])
+    return jsonify(output[0])
+
+
+#CAR PREDICT POST METHOD
+@views.route('/c_predict', methods=['POST'])
+def c_predict():
     data = [float(x) for x in request.form.values()]
-    final_input = house_scalar.transform(np.array(data).reshape(1, -1))
+    final_input = car_scalar.transform(np.array(data).reshape(1, -1))
     print(final_input)
-    output = house_regmodel.predict(final_input)[0]
+    output = car_regmodel.predict(final_input)[0] 
+    print(output)
+    output = car_regmodel.predict(final_input)[0]
     output = format(output,".2f")
-    return render_template("house.html", prediction_text="The House price prediction is {} Million $".format(output))
+    return render_template("car.html", prediction_text="The Car price prediction is ₹ {} Lakhs".format(output))
 

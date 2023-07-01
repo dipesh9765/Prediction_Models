@@ -15,25 +15,30 @@
   <body>
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">  Diabetes Prediction </span>
+        <span class="navbar-brand mb-0 h1">Car Prediction</span>
       </div>
     </nav>
     <div class="login">
       <!-- Main Input For Receiving Query to our ML -->
       <form action="{{ url_for('views.c_predict')}}" method="post">
-        <input type="text" name="PREG" placeholder="PREG" required="required" />
+        <input type="text" name="YEAR" placeholder="YEAR" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">PREG </i></button
+          <i class="fa fa-search">YEAR </i></button
         ><br />
 
-        <input type="text" name="GLU" placeholder="GLU" required="required" />
+        <input type="text" name="PP" placeholder="PP" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">GLU </i></button
+          <i class="fa fa-search">PP </i></button
         ><br />
 
-        <input type="text" name="BP" placeholder="BP" required="required" />
+        <input type="text" name="KmD" placeholder="KmD" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">BP </i></button
+          <i class="fa fa-search">KmD </i></button
+        ><br />
+
+        <input type="text" name="FT" placeholder="FT" required="required" />
+        <button type="menu" class="info" disabled>
+          <i class="fa fa-search">FT </i></button
         ><br />
 
         <input type="text" name="ST" placeholder="ST" required="required" />
@@ -41,29 +46,14 @@
           <i class="fa fa-search">ST </i></button
         ><br />
 
-        <input
-          type="text"
-          name="INSULIN"
-          placeholder="INSULIN"
-          required="required"
-        />
+        <input type="text" name="TMS" placeholder="TMS" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">INSULIN </i></button
+          <i class="fa fa-search">TMS </i></button
         ><br />
 
-        <input type="text" name="BMI" placeholder="BMI" required="required" />
+        <input type="text" name="OWN" placeholder="OWN" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">BMI </i></button
-        ><br />
-
-        <input type="text" name="DPF" placeholder="DPF" required="required" />
-        <button type="menu" class="info" disabled>
-          <i class="fa fa-search">DPF </i></button
-        ><br />
-
-        <input type="text" name="AGE" placeholder="AGE" required="required" />
-        <button type="menu" class="info" disabled>
-          <i class="fa fa-search">AGE </i></button
+          <i class="fa fa-search">OWN </i></button
         ><br />
 
         <button type="submit" class="btn btn-primary btn-block btn-large">
