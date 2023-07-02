@@ -11,18 +11,36 @@
 ### Technolgy used:
 
 1. Flask (Python)
-2. Machine Learning
+2. Machine Learning (Supervised Learning)
 3. HTML,CSS,Js
 4. Git
 
-## Models:
+# Models:
 
-### 1. Car Price Prediction Model 🚗
+## 1. [Car Price Prediction Model 🚗](https://github.com/dipesh9765/Prediction_Models/tree/main/website/Car)
 
-### 2. Diabetes Prediction Model
+## 2. [Diabetes Prediction Model](https://github.com/dipesh9765/Prediction_Models/tree/main/website/Diabetes)
 
-### 3. Calories Burnt Prediction Model 🏋️‍♀️
+## 3. [Calories Burnt Prediction Model 🏋️‍♀️](https://github.com/dipesh9765/Prediction_Models/tree/main/website/Exercise)
 
-### 4. House Price Prediction Model 🏠
+## 4. [House Price Prediction Model 🏠](https://github.com/dipesh9765/Prediction_Models/tree/main/website/House)
 
-### 5. Medical Insurance Price Prediction Model ⚕
+## 5. [Medical Insurance Price Prediction Model ⚕](https://github.com/dipesh9765/Prediction_Models/tree/main/website/Medical_Insurance)
+
+#### References:
+
+##### [Flask Documentation](https://flask.palletsprojects.com/en/2.3.x/)
+
+##### [Python Documentation](https://docs.python.org/3/)
+
+##### [Pandas Documentation](https://pandas.pydata.org/docs/)
+
+##### [Matplotlib Documentation](https://matplotlib.org/stable/index.html)
+
+##### [Numpy Documentation](https://numpy.org/doc/)
+
+##### [Sklearn Documentation](https://scikit-learn.org/)
+
+##### [Seaborn Documentation](https://seaborn.pydata.org/)
+
+##### [XGBoost Documentation](https://xgboost.readthedocs.io/)
