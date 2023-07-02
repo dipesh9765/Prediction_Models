@@ -1,0 +1,10 @@
+flask
+numpy
+pandas
+matplotlib
+seaborn
+sklearn
+pickle
+json
+xgboost
+
