@@ -13,4 +13,4 @@
 1. Flask ![Flask](https://commons.wikimedia.org/wiki/File:Flask_logo.svg) (Python) ![Python](https://commons.wikimedia.org/wiki/File:Python-logo-notext.svg)
 2. Machine Learning
 3. HTML,CSS,Js
-4. Git ![GitHub](https://commons.wikimedia.org/wiki/File:Git_icon.svg)
+4. Git ![GitHub](./.github/Git_icon.svg.png)
