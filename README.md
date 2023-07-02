@@ -10,7 +10,7 @@
 
 ### Technolgy used:
 
-1. Flask ![Flask](https://commons.wikimedia.org/wiki/File:Flask_logo.svg) (Python) ![Python](https://commons.wikimedia.org/wiki/File:Python-logo-notext.svg)
+1. Flask (Python)
 2. Machine Learning
 3. HTML,CSS,Js
-4. Git ![GitHub](./.github/download.png)
+4. Git
