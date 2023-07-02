@@ -14,3 +14,15 @@
 2. Machine Learning
 3. HTML,CSS,Js
 4. Git
+
+## Models:
+
+### 1. Car Price Prediction Model 🚗
+
+### 2. Diabetes Prediction Model
+
+### 3. Calories Burnt Prediction Model 🏋️‍♀️
+
+### 4. House Price Prediction Model 🏠
+
+### 5. Medical Insurance Price Prediction Model ⚕
