@@ -7,4 +7,4 @@ sklearn
 pickle
 json
 xgboost
-
+gunicorn

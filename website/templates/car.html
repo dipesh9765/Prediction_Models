@@ -21,7 +21,12 @@
     <div class="login">
       <!-- Main Input For Receiving Query to our ML -->
       <form action="{{ url_for('views.c_predict')}}" method="post">
-        <input type="text" name="YEAR" placeholder="YEAR" required="required" />
+        <input
+          type="text"
+          name="YEAR1"
+          placeholder="YEAR"
+          required="required"
+        />
         <button type="menu" class="info" disabled>
           <i class="fa fa-search"> YEAR of purchase of Car </i></button
         ><br />

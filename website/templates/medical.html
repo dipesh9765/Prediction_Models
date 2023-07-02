@@ -23,17 +23,17 @@
     <div class="login">
       <!-- Main Input For Receiving Query to our ML -->
       <form action="{{ url_for('views.m_predict')}}" method="post">
-        <input type="text" name="AGE" placeholder="AGE" required="required" />
+        <input type="text" name="AGE5" placeholder="AGE" required="required" />
         <button type="menu" class="info" disabled>
           <i class="fa fa-search">AGE: Age (years) </i></button
         ><br />
 
-        <input type="text" name="SEX" placeholder="SEX" required="required" />
+        <input type="text" name="SEX5" placeholder="SEX" required="required" />
         <button type="menu" class="info" disabled>
           <i class="fa fa-search">GENDER: ( Female :0 , Male:1 ) </i></button
         ><br />
 
-        <input type="text" name="BMI" placeholder="BMI" required="required" />
+        <input type="text" name="BMI5" placeholder="BMI" required="required" />
         <button type="menu" class="info" disabled>
           <i class="fa fa-search">BMI: Body mass index </i></button
         ><br />
@@ -58,7 +58,7 @@
           <i class="fa fa-search">SMOKE ? : ( Yes: 0 ,No : 1) </i></button
         ><br />
 
-        <input type="text" name="REG" placeholder="REG" required="required" />
+        <input type="text" name="REG5" placeholder="REG" required="required" />
         <button type="menu" class="info" disabled>
           <i class="fa fa-search"
             >REGION: (West:0, East:1, North:2, South:3)</i
