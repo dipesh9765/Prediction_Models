@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calorie Predictor</title>
-    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -12,6 +11,7 @@
       crossorigin="anonymous"
     />
   </head>
+
   <body>
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
@@ -28,12 +28,12 @@
           required="required"
         />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">GENDER </i></button
+          <i class="fa fa-search">GENDER: (Male:0, Female:1)</i></button
         ><br />
 
         <input type="text" name="AGE" placeholder="AGE" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">AGE </i></button
+          <i class="fa fa-search">AGE: Age (years) </i></button
         ><br />
 
         <input
@@ -43,7 +43,7 @@
           required="required"
         />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">HEIGHT </i></button
+          <i class="fa fa-search">HEIGHT: Height (cm)</i></button
         ><br />
 
         <input
@@ -53,21 +53,21 @@
           required="required"
         />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">WEIGHT </i></button
+          <i class="fa fa-search">WEIGHT: Weight (Kg)</i></button
         ><br />
 
         <input type="text" name="DUR" placeholder="DUR" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">DURATION </i></button
+          <i class="fa fa-search">DUR: Duration of Exercise (min) </i></button
         ><br />
 
         <input type="text" name="HR" placeholder="HR" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">HEART RATE </i></button
+          <i class="fa fa-search">HR: Heart Rate (count/min) </i></button
         ><br />
         <input type="text" name="BT" placeholder="BT" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">BODY TEMPERATURE </i></button
+          <i class="fa fa-search">BT: BODY TEMPERATURE (&#8451)</i></button
         ><br />
 
         <button type="submit" class="btn btn-primary btn-block btn-large">
@@ -78,15 +78,74 @@
       <br />
       <br />
     </div>
-
-    {{prediction_text}}
-
-    <!--  
+    <div class="text">{{prediction_text}}</div>
 
     <style>
+      .link {
+        color: #1010104d;
+        text-decoration: none;
+      }
+
       body {
         background-color: rgb(1, 33, 61);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
       }
+
+      .info {
+        border: none;
+        border-radius: 0 5px 5px 0;
+      }
+
+      .info:hover {
+        cursor: none;
+      }
+
+      .text {
+        margin: 70px 0 20px 395px;
+        font-size: 20px;
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        padding-left: 20px;
+      }
+
+      form {
+        width: 650px;
+        margin: 30px 100px 10px 390px;
+        padding: 20px;
+        background-color: rgb(224, 124, 2);
+        border-radius: 5px;
+      }
+
+      input {
+        margin: 5px;
+        text-align: center;
+
+        border-radius: 5px 0 0 5px;
+        /* padding: 10px; */
+      }
+
+      .btn {
+        height: 50px;
+        width: 150px;
+        margin: 10px 10px 10px 50px;
+        text-align: center;
+        font-weight: bolder;
+        font-size: 25px;
+      }
+
+      button :hover {
+        cursor: pointer;
+        color: black;
+        font-weight: 600;
+      }
+
+      .login {
+        height: 370px;
+        width: 1000px;
+        margin-left: 10px 0px 10px 100px;
+      }
+
       .navbar-brand {
         font-size: 28px;
         font-family: "Trebuchet MS", Verdana, sans-serif;
@@ -94,6 +153,5 @@
         margin-bottom: 10px;
       }
     </style>
-    -->
   </body>
 </html>

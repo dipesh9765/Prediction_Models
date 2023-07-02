@@ -95,9 +95,9 @@ def d_predict():
     output = diabetes_classifier.predict(final_input)[0] 
     print(output)
     if output == 1:
-        return render_template("diabetes.html",prediction_text=" You have Diabetes" )
+        return render_template("diabetes.html",prediction_text=" High chances of Diabetes" )
     else:
-        return render_template("diabetes.html", prediction_text=" You don't have Diabetes" )
+        return render_template("diabetes.html", prediction_text=" Low chances of Diabetes" )
 
 
 
@@ -123,7 +123,7 @@ def c_predict():
     output = car_regmodel.predict(final_input)[0] 
     print(output)
     output = format(output,".2f")
-    return render_template("car.html", prediction_text="The Car price prediction is ₹ {} Lakhs".format(output))
+    return render_template("car.html", prediction_text="The predicted car price is ₹ {} Lakhs".format(output))
 
 
 #MEDICAL PREDICT API

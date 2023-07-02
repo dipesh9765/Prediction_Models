@@ -3,8 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Car</title>
-    />
+    <title>Car Price Predictor</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -12,6 +11,7 @@
       crossorigin="anonymous"
     />
   </head>
+
   <body>
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
@@ -23,37 +23,43 @@
       <form action="{{ url_for('views.c_predict')}}" method="post">
         <input type="text" name="YEAR" placeholder="YEAR" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">YEAR </i></button
+          <i class="fa fa-search"> YEAR of purchase of Car </i></button
         ><br />
 
         <input type="text" name="PP" placeholder="PP" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">PP </i></button
+          <i class="fa fa-search">Present Price (in Lakhs) </i></button
         ><br />
 
         <input type="text" name="KmD" placeholder="KmD" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">KmD </i></button
+          <i class="fa fa-search">KiloMeters Driven </i></button
         ><br />
 
         <input type="text" name="FT" placeholder="FT" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">FT </i></button
+          <i class="fa fa-search"
+            >Fuel Type( Petrol:0 , Diesel:1 , CNG : 2)
+          </i></button
         ><br />
 
         <input type="text" name="ST" placeholder="ST" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">ST </i></button
+          <i class="fa fa-search">
+            Seller Type (Dealer:0 , Individual: 1)
+          </i></button
         ><br />
 
         <input type="text" name="TMS" placeholder="TMS" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">TMS </i></button
+          <i class="fa fa-search"
+            >TMS: Transmission Type (Manual:0 , Automatic:1)
+          </i></button
         ><br />
 
         <input type="text" name="OWN" placeholder="OWN" required="required" />
         <button type="menu" class="info" disabled>
-          <i class="fa fa-search">OWN </i></button
+          <i class="fa fa-search">OWN: Number of Owners </i></button
         ><br />
 
         <button type="submit" class="btn btn-primary btn-block btn-large">
@@ -64,15 +70,68 @@
       <br />
       <br />
     </div>
-
-    {{prediction_text}}
-
-    <!--  
+    <div class="text">{{prediction_text}}</div>
 
     <style>
       body {
         background-color: rgb(1, 33, 61);
+        font-family: "Trebuchet MS", Verdana, sans-serif;
       }
+
+      .info {
+        border: none;
+        border-radius: 0 5px 5px 0;
+      }
+
+      .info:hover {
+        cursor: not-allowed;
+      }
+
+      .text {
+        margin: 50px 0 20px 395px;
+        font-size: 20px;
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        padding-left: 20px;
+      }
+
+      form {
+        width: 650px;
+        margin: 30px 100px 10px 390px;
+        padding: 20px;
+        background-color: rgb(224, 124, 2);
+
+        border-radius: 5px;
+      }
+
+      input {
+        margin: 5px;
+        text-align: center;
+        border-radius: 5px 0 0 5px;
+      }
+
+      .btn {
+        height: 50px;
+        width: 150px;
+        margin: 10px 10px 10px 50px;
+        text-align: center;
+        font-weight: bolder;
+        font-size: 25px;
+      }
+
+      button :hover {
+        cursor: pointer;
+        color: black;
+        font-weight: 600;
+      }
+
+      .login {
+        height: 370px;
+        width: 1000px;
+        margin-left: 10px 0px 10px 100px;
+      }
+
       .navbar-brand {
         font-size: 28px;
         font-family: "Trebuchet MS", Verdana, sans-serif;
@@ -80,6 +139,5 @@
         margin-bottom: 10px;
       }
     </style>
-    -->
   </body>
 </html>
