@@ -24,6 +24,9 @@ diabetes_scalar = pickle.load(open('./website/Diabetes/d_scaling.pkl', 'rb'))
 car_regmodel = pickle.load(open('./website/Car/c_regmodel.pkl','rb'))
 car_scalar = pickle.load(open('./website/Car/c_scaling.pkl', 'rb'))
 
+medical_regmodel = pickle.load(open('./website/Medical_Insurance/m_regmodel.pkl','rb'))
+medical_scalar = pickle.load(open('./website/Medical_Insurance/m_scaling.pkl', 'rb'))
+
 
 
 @views.route('/House') 
@@ -38,6 +41,9 @@ def car():
 def diabetes():
     return render_template('diabetes.html')
 
+@views.route('/Medical-Insurance')
+def medical_insurance():
+    return render_template('medical.html')
 
 
 #HOUSE PREDICT API
@@ -60,8 +66,6 @@ def predict():
     output = house_regmodel.predict(final_input)[0]
     output = format(output,".2f")
     return render_template("house.html", prediction_text="The House price prediction is {} Million $".format(output))
-
-
 
 
 #DIABETES PREDICT API
@@ -111,7 +115,30 @@ def c_predict():
     print(final_input)
     output = car_regmodel.predict(final_input)[0] 
     print(output)
-    output = car_regmodel.predict(final_input)[0]
     output = format(output,".2f")
     return render_template("car.html", prediction_text="The Car price prediction is ₹ {} Lakhs".format(output))
+
+
+#MEDICAL PREDICT API
+@views.route('/Medical/m_predict_api', methods=['POST'])
+def m_predict_api():
+    data = request.json['data']
+    print(data)
+    print(np.array(list(data.values())).reshape(1, -1))
+    new_data = medical_scalar.transform(np.array(list(data.values())).reshape(1, -1))
+    output = medical_regmodel.predict(new_data)
+    print(output[0])
+    return jsonify(output[0])
+
+
+#MEDICAL PREDICT POST METHOD
+@views.route('/m_predict', methods=['POST'])
+def m_predict():
+    data = [float(x) for x in request.form.values()]
+    final_input = medical_scalar.transform(np.array(data).reshape(1, -1))
+    print(final_input)
+    output = medical_regmodel.predict(final_input)[0] 
+    print(output) 
+    output = format(output,".2f")
+    return render_template("medical.html", prediction_text="The Medical Insurance predicted  price is ₹ {}".format(output))
 
