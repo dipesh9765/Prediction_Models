@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | Prediction Models{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <div class="text-center mb-5 mt-4">
+      <h1 class="page-title">Next-Gen <br><span class="text-gradient">Prediction Models</span></h1>
+      <p class="fs-5 mt-4 max-w-2xl mx-auto" style="color: #cbd5e1; max-width: 600px;">
+        Empower your decisions with state-of-the-art machine learning capabilities. Select a domain below to explore predictive insights instantly.
+      </p>
+    </div>
+    
+    <div class="home-nav-grid">
+      <a class="pred-link-card" href="/House">
+        <i class="fa-solid fa-house-chimney"></i>
+        <span>House Price</span>
+      </a>
+      <a class="pred-link-card" href="/Car">
+        <i class="fa-solid fa-car-side"></i>
+        <span>Car Price</span>
+      </a>
+      <a class="pred-link-card" href="/Diabetes">
+        <i class="fa-solid fa-notes-medical"></i>
+        <span>Diabetes Risk</span>
+      </a>
+      <a class="pred-link-card" href="/Medical-Insurance">
+        <i class="fa-solid fa-file-invoice-dollar"></i>
+        <span>Medical Insurance</span>
+      </a>
+      <a class="pred-link-card" href="/Calorie-Predictor">
+        <i class="fa-solid fa-fire-flame-curved"></i>
+        <span>Calorie Burnt</span>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
