@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Price Predictor | Prediction Models</title>
+  <meta name="description" content="Predict Boston house prices using our AI-powered machine learning model.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+  <div class="app-background">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <nav class="glass-nav mb-4">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        <i class="fa-solid fa-brain me-2 brand-icon"></i>
+        <span class="brand-text">Prediction Models</span>
+      </a>
+      <a href="index.html" class="btn-outline-light">Home</a>
+    </div>
+  </nav>
+
+  <main class="container py-4 fade-in">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+        <div class="glass-card">
+
+          <div class="text-center mb-4">
+            <div class="icon-circle">
+              <i class="fa-solid fa-house-chimney fa-2x"></i>
+            </div>
+            <h2 class="fw-bold mb-2">Boston House Price Predictor</h2>
+            <p style="color: #cbd5e1;">Enter area details to estimate the property value.</p>
+          </div>
+
+          <form id="houseForm">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="form-label">Crime Rate (CRIM)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-handcuffs"></i>
+                  <input type="number" step="any" class="form-control" name="CRIM" placeholder="Per capita crime rate" required />
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="form-label">Zoning (ZN)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-map"></i>
+                  <input type="number" step="any" class="form-control" name="ZN" placeholder="Residential land proportion" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="form-label">Industry Prop (INDUS)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-industry"></i>
+                  <input type="number" step="any" class="form-control" name="INDUS" placeholder="Non-retail business acres" required />
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="form-label">Charles River (CHAS)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-water"></i>
+                  <select class="form-select" name="CHAS" required>
+                    <option value="" disabled selected>Bounds River?</option>
+                    <option value="1">Yes (1)</option>
+                    <option value="0">No (0)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="form-label">Nitric Oxides (NOX)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-cloud"></i>
+                  <input type="number" step="any" class="form-control" name="NOX" placeholder="Concentration" required />
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="form-label">Rooms (RM)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-door-open"></i>
+                  <input type="number" step="any" class="form-control" name="RM4" placeholder="Average rooms per dwelling" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="form-label">Age (AGE)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  <input type="number" step="any" class="form-control" name="Age4" placeholder="Prop built prior to 1940" required />
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="form-label">Distance (DIS)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-route"></i>
+                  <input type="number" step="any" class="form-control" name="DIS" placeholder="Weighted distance to centres" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="form-label">Highways Access (RAD)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-road"></i>
+                  <input type="number" step="any" class="form-control" name="RAD" placeholder="Accessibility index" required />
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="form-label">Tax Rate (TAX)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-file-invoice-dollar"></i>
+                  <input type="number" step="any" class="form-control" name="TAX" placeholder="Property-tax rate" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label class="form-label">Pupil-Teacher Ratio</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-chalkboard-user"></i>
+                  <input type="number" step="any" class="form-control" name="PTRATIO" placeholder="Ratio by town" required />
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="form-label">B (Black Prop)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-users-viewfinder"></i>
+                  <input type="number" step="any" class="form-control" name="B" placeholder="1000(Bk - 0.63)^2" required />
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="form-label">Lower Status (LSTAT)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-arrow-trend-down"></i>
+                  <input type="number" step="any" class="form-control" name="LSTAT" placeholder="% of population" required />
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary mt-3" id="submitBtn">
+              <i class="fa-solid fa-house-circle-check me-2"></i> Estimate House Price
+            </button>
+          </form>
+
+          <div id="resultBox"></div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const API_BASE = 'https://prediction-models-g1sm.onrender.com';
+
+    document.getElementById('houseForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const resultBox = document.getElementById('resultBox');
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Predicting...';
+      resultBox.innerHTML = '';
+
+      const formData = new FormData(this);
+
+      try {
+        const response = await fetch(`${API_BASE}/predict`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+
+        if (data.prediction_text) {
+          resultBox.innerHTML = `
+            <div class="prediction-result mt-4">
+              <h3>${data.prediction_text}</h3>
+            </div>`;
+        } else if (data.error) {
+          resultBox.innerHTML = `<div class="prediction-error mt-4"><h3>⚠️ ${data.error}</h3></div>`;
+        }
+      } catch (err) {
+        resultBox.innerHTML = `<div class="prediction-error mt-4"><h3>⚠️ Could not reach the API. Please try again.</h3></div>`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-house-circle-check me-2"></i> Estimate House Price';
+      }
+    });
+  </script>
+
+</body>
+</html>

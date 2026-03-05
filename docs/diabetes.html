@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diabetes Risk Predictor | Prediction Models</title>
+  <meta name="description" content="Assess diabetes risk using our AI-powered machine learning classifier.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+  <div class="app-background">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <nav class="glass-nav mb-4">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        <i class="fa-solid fa-brain me-2 brand-icon"></i>
+        <span class="brand-text">Prediction Models</span>
+      </a>
+      <a href="index.html" class="btn-outline-light">Home</a>
+    </div>
+  </nav>
+
+  <main class="container py-4 fade-in">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 col-md-9">
+        <div class="glass-card">
+
+          <div class="text-center mb-4">
+            <div class="icon-circle">
+              <i class="fa-solid fa-notes-medical fa-2x"></i>
+            </div>
+            <h2 class="fw-bold mb-2">Diabetes Risk Predictor</h2>
+            <p style="color: #cbd5e1;">Analyze health metrics to assess diabetes risk.</p>
+          </div>
+
+          <form id="diabetesForm">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="form-label">Pregnancies (Count)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-baby"></i>
+                  <input type="number" class="form-control" name="PREG" placeholder="e.g. 1" required />
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="form-label">Glucose Level (mg/dL)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-cubes-stacked"></i>
+                  <input type="number" step="any" class="form-control" name="GLU" placeholder="e.g. 120" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="form-label">Blood Pressure (mm Hg)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-heart-pulse"></i>
+                  <input type="number" step="any" class="form-control" name="BP2" placeholder="Diastolic BP" required />
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="form-label">Skin Thickness (mm)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-ruler-vertical"></i>
+                  <input type="number" step="any" class="form-control" name="ST2" placeholder="Triceps skin fold" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="form-label">Insulin Level (mu U/ml)</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-syringe"></i>
+                  <input type="number" step="any" class="form-control" name="INSULIN2" placeholder="Serum insulin" required />
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="form-label">BMI</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-weight-scale"></i>
+                  <input type="number" step="any" class="form-control" name="BMI2" placeholder="Body Mass Index" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="form-label">Diabetes Pedigree</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-solid fa-dna"></i>
+                  <input type="number" step="any" class="form-control" name="DPF" placeholder="e.g. 0.5 [0-2.5]" required />
+                </div>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="form-label">Age</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-regular fa-id-card"></i>
+                  <input type="number" class="form-control" name="AGE2" placeholder="Age in years" required />
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary mt-3" id="submitBtn">
+              <i class="fa-solid fa-stethoscope me-2"></i> Evaluate Risk
+            </button>
+          </form>
+
+          <div id="resultBox"></div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const API_BASE = 'https://prediction-models-g1sm.onrender.com';
+
+    document.getElementById('diabetesForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const resultBox = document.getElementById('resultBox');
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Evaluating...';
+      resultBox.innerHTML = '';
+
+      const formData = new FormData(this);
+
+      try {
+        const response = await fetch(`${API_BASE}/d_predict`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+
+        if (data.prediction_text) {
+          const isHigh = data.prediction === 1;
+          const colorStyle = isHigh
+            ? 'background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.25);'
+            : 'background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.25);';
+          const textColor = isHigh ? '#f87171' : '#34d399';
+          resultBox.innerHTML = `
+            <div class="prediction-result mt-4" style="${colorStyle}">
+              <h3 style="color: ${textColor};">${data.prediction_text}</h3>
+            </div>`;
+        } else if (data.error) {
+          resultBox.innerHTML = `<div class="prediction-error mt-4"><h3>⚠️ ${data.error}</h3></div>`;
+        }
+      } catch (err) {
+        resultBox.innerHTML = `<div class="prediction-error mt-4"><h3>⚠️ Could not reach the API. Please try again.</h3></div>`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-stethoscope me-2"></i> Evaluate Risk';
+      }
+    });
+  </script>
+
+</body>
+</html>
