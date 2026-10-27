@@ -7,7 +7,7 @@ Estimates the yearly medical insurance charge billed to a person in the US from 
 ## Summary
 
 - **Task:** regression (`charges`, in USD)
-- **Selected model:** `random_forest` (chosen by 5-fold cross-validated RMSE on the training split)
+- **Selected model:** `random_forest` (best 5-fold cross-validated RMSE on the training split)
 - **Data:** `medical_insurance/insurance.csv`, 1,338 rows (1,337 after removing duplicates), 1,069 train / 268 test, SHA-256 `388eff679557`
 - **Libraries:** scikit-learn 1.9.1, pandas 3.1.0, Python 3.13.15; seed 42
 
@@ -24,9 +24,9 @@ The baseline predicts the training mean (regression) or class prior (classificat
 
 | Candidate | CV rmse | CV r2 | CV time |
 | :-- | :-- | :-- | :-- |
-| `ridge` | 6123.6479 ± 188.42 | 0.7228 ± 0.028 | 0.09 s |
-| `random_forest` ✔ | 4738.9647 ± 200.7587 | 0.8324 ± 0.0284 | 1.2 s |
-| `hist_gradient_boosting` | 4937.5247 ± 188.1704 | 0.818 ± 0.0303 | 1.48 s |
+| `ridge` | 6123.6479 ± 188.42 | 0.7228 ± 0.028 | 0.08 s |
+| `random_forest` ✔ | 4738.9647 ± 200.7587 | 0.8324 ± 0.0284 | 1.12 s |
+| `hist_gradient_boosting` | 4937.5247 ± 188.1704 | 0.818 ± 0.0303 | 1.42 s |
 
 ## Prediction interval
 

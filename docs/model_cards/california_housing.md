@@ -5,7 +5,7 @@ Estimates the median house value of a California census block group from its inc
 ## Summary
 
 - **Task:** regression (`MedHouseVal`, in x $100,000)
-- **Selected model:** `hist_gradient_boosting` (chosen by 5-fold cross-validated RMSE on the training split)
+- **Selected model:** `hist_gradient_boosting` (best 5-fold cross-validated RMSE on the training split)
 - **Data:** `california_housing/california_housing.csv`, 20,640 rows (20,640 after removing duplicates), 16,512 train / 4,128 test, SHA-256 `a61475863454`
 - **Libraries:** scikit-learn 1.9.1, pandas 3.1.0, Python 3.13.15; seed 42
 
@@ -22,9 +22,9 @@ The baseline predicts the training mean (regression) or class prior (classificat
 
 | Candidate | CV rmse | CV r2 | CV time |
 | :-- | :-- | :-- | :-- |
-| `ridge` | 0.7205 ± 0.0139 | 0.6115 ± 0.0124 | 0.41 s |
-| `random_forest` | 0.51 ± 0.0121 | 0.8054 ± 0.0067 | 8.91 s |
-| `hist_gradient_boosting` ✔ | 0.4732 ± 0.0123 | 0.8325 ± 0.0058 | 1.88 s |
+| `ridge` | 0.7205 ± 0.0139 | 0.6115 ± 0.0124 | 0.14 s |
+| `random_forest` | 0.51 ± 0.0121 | 0.8054 ± 0.0067 | 8.56 s |
+| `hist_gradient_boosting` ✔ | 0.4732 ± 0.0123 | 0.8325 ± 0.0058 | 1.81 s |
 
 ## Prediction interval
 

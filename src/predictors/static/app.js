@@ -34,7 +34,9 @@ function numberInput(feature) {
   input.min = feature.min;
   input.max = feature.max;
   input.step = feature.integer ? "1" : "any";
-  if (feature.example !== null) input.placeholder = String(feature.example);
+  // Optional fields start empty (the model imputes them); everything else starts with a valid example.
+  if (feature.example !== null && !feature.optional) input.value = String(feature.example);
+  else if (feature.example !== null) input.placeholder = `e.g. ${feature.example}`;
   return input;
 }
 

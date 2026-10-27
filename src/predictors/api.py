@@ -152,6 +152,9 @@ def _install_middleware(app: FastAPI) -> None:
         response.headers["X-Request-ID"] = request_id
         for name, value in SECURITY_HEADERS.items():
             response.headers.setdefault(name, value)
+        if request.url.path == "/" or request.url.path.startswith("/static/"):
+            # Revalidate on every load so a redeploy is never masked by a cached script.
+            response.headers["Cache-Control"] = "no-cache"
         # Method, path, status and timing only. Request bodies are health and financial data and
         # are never logged.
         logger.info(

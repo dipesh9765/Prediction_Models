@@ -5,7 +5,7 @@ Estimates what a used car in the Indian market will sell for, from its age, mile
 ## Summary
 
 - **Task:** regression (`Selling_Price`, in lakh INR)
-- **Selected model:** `random_forest` (chosen by 5-fold cross-validated RMSE on the training split)
+- **Selected model:** `random_forest` (best 5-fold cross-validated RMSE on the training split)
 - **Data:** `car/car_data.csv`, 301 rows (299 after removing duplicates), 239 train / 60 test, SHA-256 `00b477def120`
 - **Libraries:** scikit-learn 1.9.1, pandas 3.1.0, Python 3.13.15; seed 42
 
@@ -22,9 +22,9 @@ The baseline predicts the training mean (regression) or class prior (classificat
 
 | Candidate | CV rmse | CV r2 | CV time |
 | :-- | :-- | :-- | :-- |
-| `ridge` | 1.6384 ± 0.4307 | 0.8858 ± 0.0285 | 0.08 s |
-| `random_forest` ✔ | 1.5739 ± 0.8035 | 0.8919 ± 0.0668 | 1.05 s |
-| `hist_gradient_boosting` | 2.1483 ± 0.936 | 0.8049 ± 0.0954 | 0.59 s |
+| `ridge` | 1.6384 ± 0.4307 | 0.8858 ± 0.0285 | 0.1 s |
+| `random_forest` ✔ | 1.5739 ± 0.8035 | 0.8919 ± 0.0668 | 1.0 s |
+| `hist_gradient_boosting` | 2.1483 ± 0.936 | 0.8049 ± 0.0954 | 0.54 s |
 
 ## Prediction interval
 

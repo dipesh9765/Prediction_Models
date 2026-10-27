@@ -240,5 +240,7 @@ def test_the_web_ui_is_served_from_the_same_origin(client: TestClient) -> None:
     assert "/static/app.js" in page.text
     assert "<script>" not in page.text, "inline scripts would break the CSP"
     assert client.get("/static/app.js").status_code == 200
+    assert client.get("/static/app.js").headers["Cache-Control"] == "no-cache"
+    assert "Cache-Control" not in client.get("/healthz").headers
     assert client.get("/static/style.css").status_code == 200
     assert client.get("/static/../../pyproject.toml").status_code == 404

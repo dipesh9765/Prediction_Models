@@ -7,7 +7,7 @@ Estimates the probability that a woman of Pima Indian heritage has diabetes from
 ## Summary
 
 - **Task:** classification (`Outcome`)
-- **Selected model:** `logistic_regression` (chosen by 5-fold cross-validated ROC_AUC on the training split)
+- **Selected model:** `logistic_regression` (best 5-fold cross-validated ROC AUC on the training split)
 - **Data:** `diabetes/diabetes.csv`, 768 rows (768 after removing duplicates), 614 train / 154 test, SHA-256 `698c203a14aa`
 - **Libraries:** scikit-learn 1.9.1, pandas 3.1.0, Python 3.13.15; seed 42
 
@@ -24,9 +24,9 @@ The baseline predicts the training mean (regression) or class prior (classificat
 
 | Candidate | CV roc_auc | CV accuracy | CV time |
 | :-- | :-- | :-- | :-- |
-| `logistic_regression` ✔ | 0.8434 ± 0.0185 | 0.7882 ± 0.0191 | 0.1 s |
-| `random_forest` | 0.8272 ± 0.0252 | 0.7687 ± 0.0195 | 2.59 s |
-| `hist_gradient_boosting` | 0.8227 ± 0.0175 | 0.7622 ± 0.0264 | 0.66 s |
+| `logistic_regression` ✔ | 0.8434 ± 0.0185 | 0.7882 ± 0.0191 | 0.14 s |
+| `random_forest` | 0.8272 ± 0.0252 | 0.7687 ± 0.0195 | 6.98 s |
+| `hist_gradient_boosting` | 0.8227 ± 0.0175 | 0.7622 ± 0.0264 | 1.35 s |
 
 ## Inputs
 
