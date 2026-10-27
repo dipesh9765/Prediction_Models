@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "predictors"
+version = "1.0.0"
+description = "Reproducible scikit-learn pipelines, model cards and a typed FastAPI service for five prediction tasks"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn>=0.30",
+  "pydantic>=2.8",
+  "scikit-learn>=1.5",
+  "pandas>=2.2",
+  "numpy>=1.26",
+  "joblib>=1.4",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+predictors = ["static/*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "C4", "PL", "RUF", "S", "PT", "N"]
+ignore = [
+  "PLR0913",  # model-card builders take many explicit arguments
+  "PLR2004",  # magic numbers are fine in tests and thresholds named inline
+  "S101",     # assert is how pytest works
+  "N806",     # X / X_train are the universal scikit-learn naming convention
+  "N803",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S", "PLR"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = ["integration: needs trained artifacts in ./artifacts (run `make train`)"]
+filterwarnings = ["error::sklearn.exceptions.InconsistentVersionWarning"]
+
+[tool.coverage.run]
+source = ["src/predictors"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+mypy_path = "src"
+files = ["src", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["sklearn.*", "joblib.*"]
+ignore_missing_imports = true
