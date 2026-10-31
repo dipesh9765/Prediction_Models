@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: requirements*.txt
+
+      - name: Install
+        run: python -m pip install -r requirements-dev.txt -e .
+
+      - name: Lint and format
+        run: |
+          python -m ruff check .
+          python -m ruff format --check .
+
+      - name: Type check
+        run: python -m mypy
+
+      - name: Train every model
+        run: python -m predictors.train --all
+
+      - name: Quality gate on the trained model cards
+        run: python -m predictors.check_cards
+
+      - name: Tests with coverage (unit, API and integration against the real artifacts)
+        run: python -m pytest --cov --cov-report=xml --cov-report=term
+
+      - name: Upload model cards
+        if: matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-cards
+          path: docs/model_cards/
+
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build (trains and gates every model inside the image)
+        run: docker build -t prediction-models .
+
+      - name: Smoke test the container
+        run: |
+          docker run -d --name pm -p 8000:8000 prediction-models
+          for i in $(seq 1 40); do
+            curl -fs localhost:8000/readyz && break || sleep 2
+          done
+          curl -fs localhost:8000/readyz
+          curl -fs -X POST localhost:8000/v1/car/predict \
+            -H 'Content-Type: application/json' \
+            -d '{"Year":2015,"Present_Price":6.5,"Kms_Driven":45000,"Fuel_Type":"Petrol","Seller_Type":"Dealer","Transmission":"Manual","Owner":0}'
+          docker inspect --format '{{.Config.User}}' pm | grep -qx app
+          docker logs pm
