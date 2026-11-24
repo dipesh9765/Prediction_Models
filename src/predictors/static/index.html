@@ -4,19 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Prediction Models</title>
+  <link rel="stylesheet" href="/static/tokens.css">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <header>
-    <h1>Prediction Models</h1>
-    <p>Five small machine-learning models behind one typed API. Forms are generated from the API's
-       own schema; every answer names the exact model version that produced it.</p>
-    <nav><a href="/docs">API docs</a><a href="/readyz">Status</a></nav>
+    <div class="bar">
+      <span class="brand">Prediction Models</span>
+      <nav aria-label="Reference"><a href="/docs">API docs</a><a href="/readyz">Status</a></nav>
+    </div>
+    <p class="intro">Five small machine-learning models behind one typed API. The forms are generated
+       from the API's own schema, and every answer names the exact model version that produced it.</p>
   </header>
   <main>
     <div id="tabs" role="tablist" aria-label="Models"></div>
     <section id="panel" aria-live="polite">
-      <p>Loading models...</p>
+      <p class="status">Loading models</p>
     </section>
   </main>
   <script src="/static/app.js" defer></script>

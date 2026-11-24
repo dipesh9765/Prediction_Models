@@ -1,52 +1,90 @@
-:root {
-  --bg: #f6f7f9; --card: #ffffff; --ink: #1c2330; --muted: #5d6778; --line: #d9dee7;
-  --accent: #1f5fbf; --accent-ink: #ffffff; --warn-bg: #fff4d6; --warn-ink: #6b4e00;
-  --bad-bg: #fde8e8; --bad-ink: #8a1c1c; --good: #17623b;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #12161d; --card: #1b212b; --ink: #e8ecf3; --muted: #9aa5b8; --line: #2c3544;
-    --accent: #6ea6ff; --accent-ink: #0d1117; --warn-bg: #3a3014; --warn-ink: #f2d98a;
-    --bad-bg: #3b1b1b; --bad-ink: #f4b4b4; --good: #6fd3a0;
-  }
-}
+/* Prediction Models demo. Colours, faces, sizes and radii come from tokens.css (shared with the other
+ * web projects in this portfolio). Nothing here names a literal colour or font. */
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-header, main { max-width: 860px; margin: 0 auto; padding: 0 16px; }
-header { padding-top: 28px; }
-h1 { margin: 0 0 4px; font-size: 1.6rem; }
-header p { color: var(--muted); margin: 0 0 8px; }
-nav a { margin-right: 16px; color: var(--accent); }
-#tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0 12px; }
-#tabs button { border: 1px solid var(--line); background: var(--card); color: var(--ink);
-  border-radius: 999px; padding: 6px 14px; cursor: pointer; font: inherit; }
-#tabs button[aria-selected="true"] { background: var(--accent); color: var(--accent-ink);
-  border-color: var(--accent); }
-#tabs button:disabled { opacity: .5; cursor: not-allowed; }
-section { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-  padding: 20px; margin-bottom: 40px; }
-h2 { margin: 0 0 4px; font-size: 1.25rem; }
-.lead { color: var(--muted); margin: 0 0 16px; }
-.banner { border-radius: 8px; padding: 10px 12px; margin: 0 0 16px; }
-.banner.warn { background: var(--warn-bg); color: var(--warn-ink); }
-.banner.bad { background: var(--bad-bg); color: var(--bad-ink); }
-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
-label { display: grid; gap: 4px; font-size: .9rem; color: var(--muted); }
-input, select { font: inherit; color: var(--ink); background: var(--bg);
-  border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
-input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible {
-  outline: 3px solid var(--accent); outline-offset: 2px; }
+
+html, body { overflow-x: clip; }
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font: var(--text-base) / 1.5 var(--font-ui);
+}
+
+header, main { max-width: var(--measure); margin: 0 auto; padding: 0 var(--space-4); }
+
+.bar {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: var(--space-2) var(--space-5);
+  padding: var(--space-4) 0 var(--space-3);
+  border-bottom: 1px solid var(--color-line);
+}
+.brand { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; }
+nav { display: flex; gap: var(--space-4); }
+nav a, details a { color: var(--color-ink); text-underline-offset: 3px; }
+nav a:hover { color: var(--color-signal); }
+.intro { max-width: 42rem; margin: var(--space-4) 0 var(--space-5); color: var(--color-ink-soft); }
+
+/* Models are chosen from a row of tabs; the current one carries the accent underline. */
+#tabs { display: flex; flex-wrap: wrap; gap: 0 var(--space-5); border-bottom: 1px solid var(--color-line); }
+#tabs button {
+  min-height: var(--control); padding: 0; background: none; border: 0; border-bottom: 2px solid transparent;
+  color: var(--color-ink-soft); font: inherit; font-weight: 600; cursor: pointer;
+  transition: color var(--dur-micro) var(--ease);
+}
+#tabs button:hover:not(:disabled) { color: var(--color-ink); }
+#tabs button[aria-selected="true"] { color: var(--color-ink); border-bottom-color: var(--color-signal); }
+#tabs button:disabled { color: var(--color-ink-faint); text-decoration: line-through; cursor: not-allowed; }
+
+section { padding: var(--space-5) 0 var(--space-7); }
+h2 { margin: 0 0 var(--space-1); font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 600; }
+.lead { max-width: 42rem; color: var(--color-ink-soft); margin: 0 0 var(--space-5); }
+.status { color: var(--color-ink-soft); }
+
+/* A note keeps its meaning in a rule at its edge, not in a filled box. */
+.banner { margin: 0 0 var(--space-4); padding: var(--space-2) var(--space-3); border-left: 3px solid var(--color-edge);
+  background: var(--color-panel); max-width: 42rem; }
+.banner.warn { border-left-color: var(--color-warn); }
+.banner.bad { border-left-color: var(--color-bad); }
+
+form { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: var(--space-4) var(--space-5); }
+label { display: grid; gap: var(--space-1); font-size: var(--text-sm); color: var(--color-ink-soft); }
+input, select {
+  min-height: var(--control); padding: 0 var(--space-3); font: inherit; font-family: var(--font-data);
+  color: var(--color-ink); background: var(--color-raised);
+  border: 1px solid var(--color-edge); border-radius: var(--radius-2);
+}
+input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--color-signal); outline-offset: 2px;
+}
 .actions { grid-column: 1 / -1; }
-.submit { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 8px;
-  padding: 10px 20px; font: inherit; font-weight: 600; cursor: pointer; }
+.submit {
+  min-height: var(--control); padding: 0 var(--space-5); border: 0; border-radius: var(--radius-2);
+  background: var(--color-signal); color: var(--color-on-signal); font: inherit; font-weight: 600; cursor: pointer;
+  transition: opacity var(--dur-micro) var(--ease);
+}
+.submit:hover:not(:disabled) { opacity: .88; }
 .submit:disabled { opacity: .6; cursor: progress; }
-#result { margin-top: 20px; }
-.value { font-size: 2rem; font-weight: 700; }
-.range { color: var(--muted); }
-.meter { height: 10px; background: var(--line); border-radius: 5px; overflow: hidden; margin: 8px 0; }
-.meter > span { display: block; height: 100%; background: var(--accent); }
-details { margin-top: 20px; color: var(--muted); }
-table { border-collapse: collapse; width: 100%; font-size: .9rem; }
-td, th { border-bottom: 1px solid var(--line); padding: 4px 8px; text-align: left; }
-.meta { font-size: .85rem; color: var(--muted); margin-top: 12px; }
+
+/* The answer is the one large thing on the page. */
+#result { margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--color-line); }
+#result:empty { display: none; }
+.value { font-family: var(--font-data); font-size: var(--text-2xl); font-weight: 600; font-variant-numeric: tabular-nums; }
+.range { color: var(--color-ink-soft); font-variant-numeric: tabular-nums; }
+meter { display: block; width: min(100%, 22rem); height: 0.5rem; margin: var(--space-2) 0; }
+meter::-webkit-meter-bar { background: var(--color-line); border: 0; border-radius: var(--radius-1); }
+meter::-webkit-meter-optimum-value,
+meter::-webkit-meter-suboptimum-value,
+meter::-webkit-meter-even-less-good-value { background: var(--color-signal); border-radius: var(--radius-1); }
+meter::-moz-meter-bar { background: var(--color-signal); border-radius: var(--radius-1); }
+.meta { font-size: var(--text-sm); color: var(--color-ink-soft); margin-top: var(--space-3); }
+
+details { margin-top: var(--space-5); color: var(--color-ink-soft); max-width: 42rem; }
+summary { cursor: pointer; color: var(--color-ink); font-weight: 600; }
+table { border-collapse: collapse; width: 100%; margin: var(--space-3) 0; font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
+td, th { border-bottom: 1px solid var(--color-line); padding: var(--space-1) var(--space-2); text-align: left; }
+td { font-family: var(--font-data); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; }
+}

@@ -40,6 +40,9 @@ jobs:
       - name: Type check
         run: python -m mypy
 
+      - name: Design check (demo page)
+        run: node scripts/check-design.mjs src/predictors/static
+
       - name: Train every model
         run: python -m predictors.train --all
 

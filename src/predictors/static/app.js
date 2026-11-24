@@ -49,7 +49,7 @@ function selectInput(feature) {
 
 function field(feature) {
   const unit = feature.unit ? ` (${feature.unit})` : "";
-  const hint = feature.optional ? " - optional" : "";
+  const hint = feature.optional ? ", optional" : "";
   const input = feature.kind === "category" ? selectInput(feature) : numberInput(feature);
   return el("label", {}, el("span", { text: feature.label + unit + hint }), input);
 }
@@ -67,7 +67,8 @@ function readPayload(form, features) {
 
 function format(value, unit) {
   const rounded = Math.abs(value) >= 100 ? value.toFixed(0) : value.toFixed(2);
-  return unit ? `${Number(rounded).toLocaleString()} ${unit}` : rounded;
+  const text = Number(rounded).toLocaleString();
+  return unit ? `${text} ${unit}` : text;
 }
 
 function renderResult(target, result, model) {
@@ -77,7 +78,7 @@ function renderResult(target, result, model) {
     target.append(
       el("div", { className: "value", text: `${pct}%` }),
       el("div", { text: result.label }),
-      el("div", { className: "meter" }, el("span", { style: `width:${pct}%` })),
+      el("meter", { min: 0, max: 100, value: pct, "aria-label": `${pct} percent` }),
     );
   } else {
     target.append(el("div", { className: "value", text: format(result.prediction, result.unit) }));
@@ -107,7 +108,7 @@ function renderCard(model) {
 }
 
 async function showModel(summary) {
-  panel.replaceChildren(el("p", { text: "Loading..." }));
+  panel.replaceChildren(el("p", { className: "status", text: "Loading" }));
   const model = await getJson(`/v1/models/${summary.key}`);
   const result = el("div", { id: "result" });
   const submit = el("button", { type: "submit", className: "submit", text: "Predict" });
